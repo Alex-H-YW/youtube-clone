@@ -1,86 +1,80 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import Header from './layouts/Header'
+import PageHead from './layouts/PageHead'
+//import { getSuggestedVideos, getPlaylistVideos } from '../services/videos'
+import { useEffect } from 'react'
+import Video from '../components/Video'
+import { getVideos,selectVideosState } from '../store/slice/videoSlice'
+import  {useAppSelector, useAppDispatch}  from '../hooks/useRedux'
+import { useState } from 'react';
+import { isEmpty } from 'lodash';
+import { Ivideo } from "../interface/video"
+ const Home:NextPage = () => {
+  const dispatch = useAppDispatch();
+  const videos = useAppSelector(selectVideosState);
+  const [videosData, setVideosData] = useState< any[]|undefined>();
 
-const Home: NextPage = () => {
+// const options = {
+//   method: 'GET',
+//   url: 'https://youtube-v31.p.rapidapi.com/videos',
+//   params: {part: 'contentDetails,snippet,statistics', id: '7ghhRHRP6t4'},
+//   headers: {
+//     'X-RapidAPI-Key': 'cc11434ae5msh2983f73c1f648d1p12d45ejsn1b01dcddd524',
+//     'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
+//   }
+// };
+  useEffect(()=>{
+  //axios.request(options).then((res=>console.log("res",res)));
+
+    setVideosData(videos)
+    dispatch(getVideos());
+  },[])
+  
+  useEffect(()=>{
+    setVideosData(videos);
+  },[videos])
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className='relative h-screen'>
+      <PageHead />
+      <Header />
+      <main className="relative pt-20 p-20 md:p-20 lg:p-32 ">
+       
+        <section>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6'>
+            {videosData?.map((video, index)=>(
+              !isEmpty(video.snippet) && (
+                <div>
+                <Video video={video as Ivideo} />
+              </div>
+              )   
+            ))}
+          </div>
+          
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+        </section>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
     </div>
   )
 }
 
 export default Home
+
+// export const getServerSideProps = async () => {
+//   const paramArr = [
+//     getSuggestedVideos(),
+//     getPlaylistVideos(),
+//   ];
+//   const result = await Promise.all([paramArr]);
+//   console.log("result",result);
+  
+
+
+
+//   return {
+//     props: {
+//       result
+//     },
+//   }
+// }
