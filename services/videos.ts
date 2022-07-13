@@ -21,7 +21,13 @@ export const getVideoDetail = async (id:string) => {
         url: `/videos?part=contentDetails,snippet,statistics&id=${id}`
     });
 }
-   
+
+export const getVideoComments = async (id:string) => {
+    return request({
+        method: 'GET',
+        url: `/commentThreads?part=snippet&videoId=${id}&maxResult=100`
+    });
+}
 
 
 // export const getPlaylistVideos = async () =>

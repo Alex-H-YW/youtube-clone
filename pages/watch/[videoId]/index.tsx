@@ -1,34 +1,65 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import  {useAppSelector, useAppDispatch}  from '../../../hooks/useRedux'
-import { selectVideoDetailSate, getVideoDetailById } from '../../../store/slice/videoSlice'
-import VideoDetailsInfo from '../../../components/VideoDetailsInfo'
+import VideoDetailsInfo from '../../../components/VideoInfo';
 import { isEmpty } from 'lodash';
 import { Ivideo } from '../../../interface/video';
-const VideoDetailPage = () => {
-    const router = useRouter();
-    const { videoId } = router.query
-    const dispatch = useAppDispatch();
-    const videoDetail = useAppSelector(selectVideoDetailSate);
-    const [detailData, setDetailData ] = useState({});
+import {  IComments } from '../../../interface/comments';
+import { getVideoDetail, getVideoComments } from '../../../services/videos';
+import Comments from '../../../components/Comments';
+import PlayVideo from '../../../components/PlayVideo';
+import PageHead from '../../layouts/PageHead'
+import Header from '../../layouts/Header'
+interface VideoDetailProps {
+  VideoDetail: Ivideo,
+  VideoComments: IComments
 
-    useEffect(()=>{
-        dispatch(getVideoDetailById(videoId as string));
-    },[])
-    console.log("videoDetail", videoDetail);
-
-    useEffect(()=>{
-        setDetailData(videoDetail);
-      },[videoDetail])
+}
+const VideoDetailPage: React.FC<VideoDetailProps> = ({VideoDetail, VideoComments}) => {
+     const router = useRouter();
+     const {videoId} = router.query;
+     console.log("id",videoId);
+     const { snippet } = VideoDetail
+  
     
   return (
-    <div>
+    <>
+      <PageHead />
+      <Header />
       {
-        !isEmpty(detailData) &&
-        <VideoDetailsInfo detailData={detailData as Ivideo}/>
+        !isEmpty(videoId) && !isEmpty(snippet) &&
+        <PlayVideo videoId={videoId as string} snippet={snippet} />
       }
+      {
+        !isEmpty(VideoDetail) &&
+        <VideoDetailsInfo VideoDetail={VideoDetail}  />
+      }
+      {
+        !isEmpty(VideoComments)&& 
+        <Comments VideoComments={VideoComments}/>
+
+      }
+        
+
+      
        
-    </div>
+    </>
   )
+}
+
+export const getServerSideProps = async (context: { query: { videoId: any; }; }) => {
+  const { videoId } = context.query;
+  const paramsArr = [
+    getVideoDetail(videoId as string),
+    getVideoComments(videoId as string),
+  ];
+
+  const result = await Promise.all(paramsArr);
+  const [VideoDetail, VideoComments] = result;
+
+  return {
+    props: {
+      VideoDetail: VideoDetail.items[0],
+      VideoComments: VideoComments.items
+    },
+  }
 }
 export default VideoDetailPage;

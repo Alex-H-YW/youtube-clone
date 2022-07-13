@@ -19,15 +19,13 @@ const Video: React.FC<VideoProps> = ({ video }) => {
             setsnippetValue(snippet)
         }  
     }
-,[video, snippet]);
+    ,[video, snippet]);
+
     const handleVideoClick = () => {
         router.push(`/watch/${id.videoId}`)
 
-    }
-    
-    
-        
-    //  const _videoId = id?.videoId  || id
+    } 
+
   return (
     !isEmpty(snippetValue) && (
         <div className='cursor-pointer' onClick={handleVideoClick}>

@@ -1,4 +1,5 @@
 export interface Ivideos {
+    map(arg0: (video: any, index: any) => false | JSX.Element): import("react").ReactNode;
     videos: [Ivideo]
 };
 
