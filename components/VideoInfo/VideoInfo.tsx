@@ -4,11 +4,11 @@ import dayjs from 'dayjs'
 interface DetailsInfoProps {
     VideoDetail: Ivideo
 }
-const VideoDetailsInfo: React.FC<DetailsInfoProps> = ({VideoDetail}) => {
+const VideoInfo: React.FC<DetailsInfoProps> = ({VideoDetail}) => {
     const {snippet, statistics } = VideoDetail;
 
   return (
-    <div className='lg:w-9/12 px-10'>
+    <div className='pr-8 w-11/12'>
         <h5 className='text-xl line-clamp-2 py-4'>{snippet.title}</h5>
         <div className='flex justify-between border-b-2 py-3 text-sm'>
             <div className='flex justify-start text-gray-400'>
@@ -34,4 +34,4 @@ const VideoDetailsInfo: React.FC<DetailsInfoProps> = ({VideoDetail}) => {
     </div>
   )
 }
-export default VideoDetailsInfo;
+export default VideoInfo;

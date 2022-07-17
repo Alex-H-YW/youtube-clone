@@ -1,12 +1,6 @@
 import Head from 'next/head';
 
 
-// interface PageHeadProps {
-// 	meta?: object;
-// 	url?: string;
-// 	thumbnailSrc?: string;
-// 	title?: string;
-// }
 
 const PageHead: React.FC = () => {
 

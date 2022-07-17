@@ -4,15 +4,15 @@ import request from "../utils/request";
 //     id:string;
 
 // }
-export const getSuggestedVideos = async () =>
+export const getSuggestedVideos = async (id:string) =>
 request({
     method: 'GET',
-    url: '/search?relatedToVideoId=7ghhRHRP6t4&part=id,snippet,statistics&type=video'
+    url: `/search?relatedToVideoId=${id}&part=id,snippet,statistics&type=video`
 });
 export const getPlaylistVideos = async () =>
 request({
     method: 'GET',
-    url: '/playlistItems?playlistId=RDZiQo7nAkQHU&part=snippet'
+    url: '/playlistItems?playlistId=RDZiQo7nAkQHU&part=snippet&maxResults=50'
 });
 
 export const getVideoDetail = async (id:string) => {
@@ -29,9 +29,11 @@ export const getVideoComments = async (id:string) => {
     });
 }
 
+export const getSeatchVideos = async (q:string) => {
+    return request({
+        method: 'GET',
+        url: `/search?q=${q}&part=snippet,id&maxResults=50`
+    });
+}
 
-// export const getPlaylistVideos = async () =>
-// request({
-//     method: 'GET',
-//     url: '/playlistItems?playlistId=RDZiQo7nAkQHU&part=snippet'
-// });
+

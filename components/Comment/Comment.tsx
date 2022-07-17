@@ -19,7 +19,7 @@ const Comment:React.FC<CommentProps> = ({comment}) => {
             <p className='text-xs py-1 text-gray-500'>
                {comment.authorDisplayName} • {dayjs(comment.publishedAt).fromNow()}
             </p>
-            <p className='mb-0'>{comment.textDisplay}</p>
+            <p className='mb-0 line-clamp-4'>{comment.textDisplay}</p>
          </div>
       </div>
   )

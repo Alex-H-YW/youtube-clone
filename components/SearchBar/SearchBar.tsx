@@ -1,12 +1,30 @@
 import { SearchIcon } from '@heroicons/react/solid'
+import { useCallback, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const SearchBar = () => {
-  const handleSubmit = () => {
-		// dispatch(setQueries({ queries: input }));
-		// router.push({ pathname: '/jobs', query: input as unknown as string });
+  const router = useRouter();
+  const [searchString, setSearchString] = useState<string>('');
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    router.push({
+      pathname: '/search',
+      query: {
+        q: searchString
+      }
+    })
+	
 	};
-  const onChange = () => {
-    };
+
+
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchString(event.target.value);
+  }
+
+
+    console.log("searchString", searchString);
+    
   return (
     <div className='flex items-center justify-center w-full'>
       <form className='flex items-center h-13 border-solid border-2 w-full sm:w-2/5 lg:max-w-xl'>
@@ -14,6 +32,7 @@ const SearchBar = () => {
           className='border-none focus:outline-none w-full'
           placeholder=' Search' 
           onChange={onChange} 
+          value={searchString}
         />
         <button 
           type='submit' 

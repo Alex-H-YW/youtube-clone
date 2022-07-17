@@ -22,7 +22,7 @@ const Video: React.FC<VideoProps> = ({ video }) => {
     ,[video, snippet]);
 
     const handleVideoClick = () => {
-        router.push(`/watch/${id.videoId}`)
+        router.push(`/watch/${snippetValue.resourceId.videoId}`)
 
     } 
 

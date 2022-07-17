@@ -8,7 +8,7 @@ interface PlayVideoProps {
 
 const PlayVideo:React.FC<PlayVideoProps> = ({ videoId, snippet }) => {
   return (
-    <div className='relative lg:w-9/12 px-10 pt-24'>
+    <div className='pr-8 w-11/12'>
         <iframe
             src={`https://www.youtube.com/embed/${videoId}`}
             frameBorder='0'

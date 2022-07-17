@@ -8,12 +8,11 @@ interface CommentsProps {
 const Comments:React.FC<CommentsProps> = ({VideoComments}) => {
     const totalComments = VideoComments.length 
     const comments = VideoComments.map(
-        (comment: { snippet: { topLevelComment: { snippet: any } } }) => comment.snippet.topLevelComment.snippet
+        (comment: { snippet: { topLevelComment: { snippet: object } } }) => comment.snippet.topLevelComment.snippet
      )
-     console.log("comments",comments);
      
   return (
-    <div className='lg:w-9/12 px-10'>
+    <div className='pr-8 w-11/12'>
          <p  className='py-4'>{totalComments} Comments</p>
          <div className='my-2 comments__form d-flex w-100'>
             <form className='flex flex-grow-1 justify-between border-b-2'>
@@ -27,7 +26,7 @@ const Comments:React.FC<CommentsProps> = ({VideoComments}) => {
                 </button> */}
             </form>
          </div>
-         <div className='comments__list'>
+         <div>
             {comments?.map((comment: ItopLevelSnippet, i: React.Key | null | undefined) => (
                <Comment comment={comment} key={i} />
             ))}

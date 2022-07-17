@@ -15,14 +15,14 @@ interface HomeProps {
   //const [videosData, setVideosData] = useState< any[]|undefined>();
 
   // useEffect(()=>{
-  //   setVideosData(videos)
-  //   dispatch(getVideos());
-  // },[])
+    //setVideosData(videos)
+    //dispatch(getVideos());
+  //},[])
   
   // useEffect(()=>{
   //   setVideosData(videos);
   // },[videos])
-  console.log(videos);
+
   
 
   return (
@@ -56,10 +56,9 @@ export const getServerSideProps = async () => {
   //   getSuggestedVideos(),
   //   getPlaylistVideos(),
   // ];
-  const result = await getSuggestedVideos();
-  console.log("result",result);
-  const {items} = result
-  
+  const result = await getPlaylistVideos();
+  const { items } = result
+
 
   return {
     props: {
