@@ -1,5 +1,5 @@
 export interface Ivideos {
-    map(arg0: (video: any, index: any) => false | JSX.Element): import("react").ReactNode;
+    [x: string]: any;
     videos: [Ivideo]
 };
 
@@ -16,6 +16,7 @@ export interface Iid {
 };
 
 export interface Isnippet {
+    [x: string]: any;
     publishedAt: string;
     channelId: string;
     title: string;
@@ -27,9 +28,11 @@ export interface Isnippet {
 };
 
 interface Ithumbnails {
-    default:Ithumbnail
-    medium:Ithumbnail
-    high:Ithumbnail
+    default: Ithumbnail;
+    medium: Ithumbnail;
+    high: Ithumbnail;
+    standard?: Ithumbnail;
+    maxres?: Ithumbnail;
 };
 
 interface Ithumbnail {

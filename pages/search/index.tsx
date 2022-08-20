@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 import { getSeatchVideos } from '../../services/videos'
 import { useEffect, useState } from 'react';
-import axios
- from 'axios';
 import { isEmpty } from 'lodash';
+
 const index:React.FC = ()=> {
     const router = useRouter();
     const {q} = router.query;
@@ -19,10 +18,8 @@ const index:React.FC = ()=> {
     }
     
   },[q])
-console.log(searchVideo);
-const snippet = searchVideo?.map(item=>item.snippet);
-console.log(snippet);
-
+console.log("searchVideo", searchVideo);
+//const snippet = searchVideo?.map(item=>item.snippet);
 
   return (
     <div>
@@ -30,5 +27,4 @@ console.log(snippet);
     </div>
   )
 }
-
 export default index

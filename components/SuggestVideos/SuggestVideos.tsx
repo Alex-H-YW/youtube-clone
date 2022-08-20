@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import { Ivideos } from '../../interface/video'
+import { Isnippet, Ivideos } from '../../interface/video'
 import dayjs from 'dayjs';
 import VideoList from '../VideoList';
 
@@ -9,13 +9,13 @@ interface SuggestProps {
 
 const SuggestVideos:React.FC<SuggestProps> = ({Suggest})=> {
 
-    const SuggestSnippet = Suggest.map( item => item.snippet)
-    const Snippets = SuggestSnippet?.filter(i=> !!i==true)
+    const SuggestSnippet:Isnippet = Suggest.map( (item: { snippet: Isnippet; }) => item.snippet)
+    const Snippets = SuggestSnippet?.filter((i: Isnippet)=> !!i==true)
   console.log("Suggest", Suggest);
   
   return (
     <div className='pr-64' >
-        {Snippets.map(item => 
+        {Snippets.map((item: Isnippet) => 
             <VideoList snippet={item}/>
         )               
         }     

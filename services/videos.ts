@@ -1,9 +1,5 @@
 import request from "../utils/request";
-// export interface Idetail {
-//     part:string;
-//     id:string;
 
-// }
 export const getSuggestedVideos = async (id:string) =>
 request({
     method: 'GET',

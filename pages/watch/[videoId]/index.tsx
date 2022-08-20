@@ -25,7 +25,7 @@ const VideoDetailPage: React.FC<VideoDetailProps> = ({VideoDetail, VideoComments
       <PageHead />
       <Header />
       <div className='flex pt-24'>
-        <div className='w-11/12 flex flex-col items-end pl-64'>
+        <div className=' flex flex-col items-end lg:pl-64 lg:w-11/12'>
              {
               !isEmpty(videoId) && !isEmpty(snippet) &&
               <PlayVideo videoId={videoId as string} snippet={snippet} />

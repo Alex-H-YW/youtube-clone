@@ -41,8 +41,6 @@ interface HomeProps {
               )   
             ))}
           </div>
-          
-
         </section>
 
       </main>
