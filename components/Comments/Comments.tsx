@@ -27,7 +27,7 @@ const Comments:React.FC<CommentsProps> = ({VideoComments}) => {
             </form>
          </div>
          <div>
-            {comments?.map((comment: ItopLevelSnippet, i: React.Key | null | undefined) => (
+            {comments?.map((comment: ItopLevelSnippet, i:number) => (
                <Comment comment={comment} key={i} />
             ))}
          </div>

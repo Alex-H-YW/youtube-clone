@@ -9,17 +9,18 @@ const Comment:React.FC<CommentProps> = ({comment}) => {
    dayjs.extend(relativeTime);
     
   return (
-    <div className='flex items-start border-b py-5'>
+    <div className='flex items-start border-b py-5' role='content'>
          <img
-            src={comment.authorProfileImageUrl}
+            role="image"
+            src={comment?.authorProfileImageUrl}
             alt=''
             className='mr-3 rounded-full'
          />
          <div>
             <p className='text-xs py-1 text-gray-500'>
-               {comment.authorDisplayName} • {dayjs(comment.publishedAt).fromNow()}
+               {comment?.authorDisplayName} • {dayjs(comment?.publishedAt).fromNow()}
             </p>
-            <p className='mb-0 line-clamp-4'>{comment.textDisplay}</p>
+            <p data-testid="textDisplay" className='mb-0 line-clamp-4'>{comment?.textDisplay}</p>
          </div>
       </div>
   )

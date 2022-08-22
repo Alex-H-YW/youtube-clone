@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 interface IRequest {
 	method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
@@ -12,15 +12,15 @@ const axiosInstance = axios.create({
 	timeout: 30000
 });
 
-axiosInstance.interceptors.response.use(
-	response => {
-		return Promise.resolve(response.data);
-	},
-	error => {
-		const { response } = error;
-		return Promise.reject(response || error);
-	}
-);
+// axiosInstance.interceptors.response.use(
+// 	response => {
+// 		return Promise.resolve(response.data);
+// 	},
+// 	error => {
+// 		const { response } = error;
+// 		return Promise.reject(response || error);
+// 	}
+// );
 
 export default function request(options: IRequest) {
 	return axiosInstance({

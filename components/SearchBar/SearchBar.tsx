@@ -5,26 +5,19 @@ import { useRouter } from 'next/router';
 const SearchBar = () => {
   const router = useRouter();
   const [searchString, setSearchString] = useState<string>('');
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
+
+  const handleSubmit = () => {
     router.push({
       pathname: '/search',
       query: {
         q: searchString
       }
     })
-	
 	};
-
-
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(event.target.value);
   }
-
-
-    console.log("searchString", searchString);
-    
+   
   return (
     <div className='flex items-center justify-center w-full'>
       <form className='flex items-center h-13 border-solid border-2 w-full sm:w-2/5 lg:max-w-xl'>
@@ -36,7 +29,7 @@ const SearchBar = () => {
         />
         <button 
           type='submit' 
-          onClick={handleSubmit} 
+          onClick={() => handleSubmit()} 
           className='flex items-center justify-center border-solid border-l-2 bg-gray-50 h-10 w-16'
         >
           <SearchIcon className="h-6 w-6 text-gray-400" />
